@@ -4,10 +4,10 @@ const { v4: uuidv4 } = require('uuid');
 const db = require('../database');
 const checkAdminKey = require('../middleware/checkAdminKey');
 
-// Generate API key
+// Generate license key
 router.post('/generate-key', checkAdminKey, (req, res) => {
   const isAdmin = req.body.is_admin ? 1 : 0;
-  const expiresAt = req.body.expires_at || null;
+  const expiresAt = req.body.expires_at || null; // ISO date string
   const maxUsage = req.body.max_usage || 0;
   const deviceId = req.body.device_id || null;
   const newKey = uuidv4();
@@ -22,7 +22,7 @@ router.post('/generate-key', checkAdminKey, (req, res) => {
   );
 });
 
-// List keys
+// List all keys
 router.get('/list-keys', checkAdminKey, (req, res) => {
   db.all('SELECT id, key, is_admin, device_id, usage_count, max_usage, created_at, expires_at FROM api_keys', [], (err, rows) => {
     if (err) return res.status(500).json({ error: 'Database error' });
@@ -30,7 +30,7 @@ router.get('/list-keys', checkAdminKey, (req, res) => {
   });
 });
 
-// Revoke key
+// Revoke a key
 router.delete('/revoke-key/:key', checkAdminKey, (req, res) => {
   const keyToDelete = req.params.key;
   db.run('DELETE FROM api_keys WHERE key = ?', [keyToDelete], function (err) {
