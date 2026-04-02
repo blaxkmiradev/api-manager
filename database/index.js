@@ -2,7 +2,7 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const db = new sqlite3.Database(path.join(__dirname, '../apikeys.db'));
 
-// Create tables
+// Create table for license keys
 db.serialize(() => {
   db.run(`
     CREATE TABLE IF NOT EXISTS api_keys (
