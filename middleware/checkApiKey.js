@@ -18,6 +18,7 @@ function checkApiKey(req, res, next) {
     if (err) return res.status(500).json({ error: 'Database error' });
     if (!row) return res.status(403).json({ error: 'Invalid API key' });
 
+    // Expiration check
     if (row.expires_at && new Date(row.expires_at) < new Date()) {
       return res.status(403).json({ error: 'API key expired' });
     }
