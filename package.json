@@ -1,7 +1,7 @@
 {
-  "name": "api-manager",
+  "name": "api-license-manager",
   "version": "1.0.0",
-  "description": "API manager with device locking, usage logging, admin keys, and SQLite",
+  "description": "API license key manager with expiration, revocation, device locking, and usage limits",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
