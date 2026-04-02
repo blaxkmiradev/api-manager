@@ -46,8 +46,8 @@ api-license-manager/
 **1. Clone the repository**
 
 ```bash
-git clone <repo-url>
-cd api-license-manager
+git clone https://github.com/blaxkmiradev/api-manager.git
+cd api-manager
 ```
 
 **2. Install dependencies**
